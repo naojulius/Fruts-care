@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Progress } from '@/components/ui/progress'
+import { Progress } from '@/components/ui/progress';
 
+const loading = useLoading();
+let fruitsInCase = ref(0);
+let caseSize = ref(100);
 let isClicked = ref(false);
 let imgClass = ref("");
 const scale = "transform scale-105";
 const onHarvest = () => {
   if (isClicked.value) return;
+  if (fruitsInCase.value >= caseSize.value) return;
+  fruitsInCase.value++;
 
   isClicked.value = true;
   imgClass.value = scale;
@@ -16,6 +21,20 @@ const onHarvest = () => {
     isClicked.value = false;
   }, 50);
 };
+onBeforeMount(() => {
+  //loading.show();
+});
+const t = ref(null)
+onMounted(async () => {
+  const params = new URLSearchParams(Telegram.WebApp.initData);
+
+  const userData = Object.fromEntries(params);
+
+  if(userData &&  userData.user){
+    userData.user = JSON.parse(userData.user);
+    t.value = JSON.stringify(userData.user)
+  }
+})
 </script>
 
 <template>
@@ -31,11 +50,15 @@ const onHarvest = () => {
           <div class="text-gray-700 font-bold w-full h-full text-left">BOOST</div>
         </Button>
         <Button class=" w-1/2 bg-gray-100 flex flex-row items-center justify-start">
-           <div class="text-gray-700 font-bold w-full h-full text-right">RE-PLANT</div>
+           <div class="text-gray-700 font-bold w-full h-full text-right">EXTAND</div>
           <img src="/icons/test-tubes.png" alt="harvester" class="w-5 h-5">
         </Button>
      </div>
-     <Progress :model-value="33" />
+     <Progress v-if="fruitsInCase < caseSize" class="w-4/5" :model-value="fruitsInCase" />
+     <span v-else class="cursor-pointer">
+        Claim Your Reward
+     </span>
+     {{ t }}
   </div>
 </template>
 
