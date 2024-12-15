@@ -24,7 +24,7 @@ const onHarvest = () => {
 onBeforeMount(() => {
   //loading.show();
 });
-const t = ref(null)
+const user = ref(null)
 onMounted(async () => {
   const params = new URLSearchParams(Telegram.WebApp.initData);
 
@@ -32,7 +32,7 @@ onMounted(async () => {
 
   if(userData &&  userData.user){
     userData.user = JSON.parse(userData.user);
-    t.value = JSON.stringify(userData.user)
+    user.value = userData.user.username;
   }
 })
 </script>
@@ -58,7 +58,7 @@ onMounted(async () => {
      <span v-else class="cursor-pointer">
         Claim Your Reward
      </span>
-     {{ t }}
+     {{ user }}
   </div>
 </template>
 
