@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { Progress } from '@/components/ui/progress'
+
 let isClicked = ref(false);
 let imgClass = ref("");
 const scale = "transform scale-105";
@@ -17,12 +19,23 @@ const onHarvest = () => {
 </script>
 
 <template>
-  <div class="bg-gray-200 flex flex-col justify-center items-center">
+  <div class="bg-gray-200 flex gap-2 flex-col justify-center items-center">
     <div @click="onHarvest"
       class="w-72 h-72 bg-gradient-to-t from-transparent to-white p-6 rounded-full cursor-pointer">
       <img src="/icons/harvest.png" alt="harvest" :class="['-mt-5', imgClass]"
         class="transition-transform duration-100 ease-in-out" />
     </div>
+    <div class="rounded-xl w-4/5 flex flex-row justify-between items-center p-1 gap-1">
+        <Button class=" w-1/2 bg-gray-100 flex flex-row items-center justify-start">
+          <img src="/icons/drone.png" alt="harvester" class="w-5 h-5">
+          <div class="text-gray-700 font-bold w-full h-full text-left">BOOST</div>
+        </Button>
+        <Button class=" w-1/2 bg-gray-100 flex flex-row items-center justify-start">
+           <div class="text-gray-700 font-bold w-full h-full text-right">RE-PLANT</div>
+          <img src="/icons/test-tubes.png" alt="harvester" class="w-5 h-5">
+        </Button>
+     </div>
+     <Progress :model-value="33" />
   </div>
 </template>
 

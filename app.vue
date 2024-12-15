@@ -7,3 +7,15 @@
     </div>
   </div>
 </template>
+<script lang="ts" setup>
+  const Howler = useNuxtApp().$howler; // Access Howler globally
+
+let sound: Howler.Howl | null = null;
+// sound = new Howl({
+//   src: ['/audios/bg-music.ogg'],
+//   volume: 1,
+//   loop: true,
+//   onend: () => console.log('Audio finished playing')
+// }).play();
+
+</script>
