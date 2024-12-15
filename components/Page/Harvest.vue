@@ -32,7 +32,7 @@ onMounted(async () => {
 
   if(userData &&  userData.user){
     userData.user = JSON.parse(userData.user);
-    user.value = userData.user.username;
+    user.value = userData.user.first_name;
   }
 })
 </script>
