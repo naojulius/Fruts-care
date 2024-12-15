@@ -24,23 +24,6 @@ const onHarvest = () => {
 onBeforeMount(() => {
   //loading.show();
 });
-const user = ref(null)
-
-
-if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        Telegram.WebApp.ready();
-        const params = new URLSearchParams(Telegram.WebApp.initData);
-        const userData = Object.fromEntries(params);
-        if (userData.user) {
-          userData.user = JSON.parse(userData.user);
-        }
-        user.value = userData.user.first_name;
-        
-        console.log('Telegram user data:',user);
-      } else {
-        console.error('Telegram Web App is not available');
-    }
-
 </script>
 
 <template>
@@ -64,7 +47,6 @@ if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
      <span v-else class="cursor-pointer">
         Claim Your Reward
      </span>
-     {{ user }}
   </div>
 </template>
 
